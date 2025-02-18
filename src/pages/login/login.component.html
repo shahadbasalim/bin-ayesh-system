@@ -1,0 +1,36 @@
+<div class="login-container">
+  <h2 class="title">تسجيل الدخول</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-icon matPrefix>email</mat-icon>
+      <mat-label> البريد الإلكتروني </mat-label>
+      <input matInput id="email" type="email" formControlName="email" />
+      <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+        البريد الإلكتروني مطلوب
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+        البريد الإلكتروني غير صحيح
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-icon matPrefix>lock</mat-icon>
+      <mat-label>كلمة المرور</mat-label>
+      <span matPrefix><i class="fas fa-lock"></i>&nbsp;</span>
+      <input
+        matInput
+        id="password"
+        type="password"
+        formControlName="password"
+      />
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+        كلمة المرور مطلوبة
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-mini-fab  type="submit" class="main-button">
+      دخول <i ></i>
+    </button>
+    <button>هل نسيت كلمة المرور؟</button>
+  </form>
+</div>

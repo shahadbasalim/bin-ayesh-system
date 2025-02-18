@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+:root {
+  --primary: #088395;
+  --white: #f8f8f8;
+}
+html,
+body {
+  height: 100%;
+  font-family: "Tajawal", serif ;
+}
+body {
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
+
+/* .mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-bottom-align::before {
+  font-family: "Tajawal", serif !important;
+} */
+
+.title {
+  color: var(--white);
+}
+button {
+  all: unset;
+  color: var(--white);
+  cursor: pointer;
+  margin-top: 10px;
+}
+.main-button {
+  background-color: var(--white) !important;
+  color: var(--primary) !important;
+  width: 100% !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+}
