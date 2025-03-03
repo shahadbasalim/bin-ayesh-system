@@ -1,0 +1,14 @@
+<div class="users-page sec-bg sec-padding">
+  <app-table
+    [title]="'المستخدمين'"
+    [addButtonLabel]="'إضافة مستخدم'"
+    [columns]="userColumns"
+    [dataSource]="dataSource"
+
+    [hasDeleteAction]="true"
+
+    (addUser)="openAddUserDialog()"
+
+    (deleteUser)="openDeleteDialog($event)"
+  ></app-table>
+</div>

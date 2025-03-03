@@ -1,17 +1,9 @@
 .login-container {
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   background-color: var(--primary);
   width: 100%;
 }
 .login-container form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 50%;
 }
 mat-form-field {

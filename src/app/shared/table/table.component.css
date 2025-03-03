@@ -1,0 +1,30 @@
+.title-add-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 70px;
+}
+.add-icon {
+  margin: 5px !important;
+}
+.search-container {
+  display: flex;
+  justify-content: end;
+}
+table {
+  background-color: var(--white);
+}
+th {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+th,
+td {
+  text-align: center;
+}
+
+.paginator-container {
+  direction: ltr;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}

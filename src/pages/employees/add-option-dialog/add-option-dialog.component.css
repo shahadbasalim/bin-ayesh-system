@@ -1,0 +1,10 @@
+.add-option-dialog {
+  direction: rtl;
+  margin-right: 10px;
+}
+.mat-dialog-actions button{
+  margin: 20px !important;
+}
+.cancel-btn {
+  color: black;
+}

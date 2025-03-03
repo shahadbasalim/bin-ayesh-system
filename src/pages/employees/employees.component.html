@@ -1,0 +1,17 @@
+<div class="employees-page sec-bg sec-padding">
+  <app-table
+    [title]="'الموظفين'"
+    [addButtonLabel]="'إضافة موظف'"
+
+    [columns]="employeesColumns"
+    [dataSource]="dataSource"
+
+    [hasDetailsActions]="true"
+
+    (addUser)="openAddEmployeeDialog()"
+    
+    (editEmployee)="onEditEmployee($event)"
+    (viewEmployee)="onViewEmployee($event)"
+  >
+  </app-table>
+</div>

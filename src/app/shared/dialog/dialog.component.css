@@ -1,0 +1,22 @@
+.dialog {
+  direction: rtl;
+  margin-right: 20px;
+}
+mat-form-field {
+  width: 70%;
+}
+.mat-dialog-actions {
+  margin: 10px;
+}
+mat-select,
+mat-option {
+  background-color: white !important;
+}
+
+::ng-deep .mat-datepicker-content,
+::ng-deep .mat-calendar {
+  background-color: var(--primary);
+}
+.file-upload {
+  margin-bottom: 15px;
+}

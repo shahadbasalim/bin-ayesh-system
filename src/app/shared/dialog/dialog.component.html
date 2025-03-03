@@ -1,0 +1,84 @@
+<div class="dialog">
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <div mat-dialog-content id="pdfContent">
+    <form [formGroup]="form">
+      <ng-container *ngFor="let field of data.fields">
+        <mat-form-field appearance="fill" *ngIf="field.type !== 'file'">
+          <mat-label>{{ field.label }}</mat-label>
+          <ng-container [ngSwitch]="field.type">
+            <!-- type text -->
+            <input
+              *ngSwitchCase="'text'"
+              [formControlName]="field.key"
+              matInput
+            />
+            <!-- type dropdown -->
+            <mat-select
+              *ngSwitchCase="'dropdown'"
+              [formControlName]="field.key"
+            >
+              <mat-option *ngFor="let option of field.options" [value]="option"
+                >{{ option }}
+              </mat-option>
+              <mat-option
+                *ngIf="
+                  field.key === 'sponsorNumber' ||
+                  field.key === 'nationality' ||
+                  field.key === 'job' ||
+                  field.key === 'branch'
+                "
+                (click)="openAddOptionDialog(field)"
+              >
+                <mat-icon>add</mat-icon>
+                اضافة {{ field.label }}
+              </mat-option>
+            </mat-select>
+            <ng-container *ngSwitchCase="'date'">
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [formControlName]="field.key"
+              />
+            </ng-container>
+          </ng-container>
+          <mat-error *ngIf="form.get(field.key)?.hasError('required')">
+            {{ field.label }} مطلوب
+          </mat-error>
+        </mat-form-field>
+
+        <!--  حقول الملفات -->
+        <div *ngIf="field.type === 'file'" class="file-upload">
+            <label>{{ field.label }}</label>
+            <input type="file"  />
+        </div>
+      </ng-container>
+    </form>
+  </div>
+
+  <div mat-dialog-actions align="center" class="mat-dialog-actions">
+    <button
+      *ngIf="data.mode !== 'view'"
+      mat-flat-button
+      class="rectangle-btn"
+      (click)="onSave()"
+      [disabled]="form.invalid"
+    >
+      حفظ
+    </button>
+    <button
+      *ngIf="data.mode === 'view'"
+      mat-flat-button
+      class="rectangle-btn"
+      (click)="onPreview()"
+
+    >
+      معاينة قبل التنزيل
+    </button>
+    <button mat-button (click)="dialogRef.close()">إلغاء</button>
+  </div>
+</div>

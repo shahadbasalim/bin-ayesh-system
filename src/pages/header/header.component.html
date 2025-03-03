@@ -1,0 +1,27 @@
+<header *ngIf="showHeader">
+  <h1 class="section-title">مرحبا</h1>
+  <div class="nav" [class.open]="isNavOpen">
+    <ul>
+      <!-- arrow icon -->
+      <li (click)="toggleNav()">
+        <a>
+          <mat-icon>{{ getArrowIcon() }}</mat-icon>
+        </a>
+      </li>
+
+      <!-- links -->
+      <li
+        *ngFor="let link of navLinks"
+        [class.active]="activeRoute === link.path"
+      >
+        <a [routerLink]="link.path">
+          <mat-icon
+            [style.color]="link.path === '/login' ? 'red' : 'inherit'"
+            >{{ link.icon }}</mat-icon
+          >
+          <span *ngIf="isNavOpen">{{ link.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>

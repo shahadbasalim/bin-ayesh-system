@@ -1,10 +1,16 @@
-<div class="login-container">
+
+<div class="login-container flex-column">
   <h2 class="title">تسجيل الدخول</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex-column">
     <mat-form-field appearance="fill">
       <mat-icon matPrefix>email</mat-icon>
       <mat-label> البريد الإلكتروني </mat-label>
-      <input matInput id="email" type="email" formControlName="email" />
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        autocomplete="off"
+      />
       <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
         البريد الإلكتروني مطلوب
       </mat-error>
@@ -16,21 +22,15 @@
     <mat-form-field appearance="fill">
       <mat-icon matPrefix>lock</mat-icon>
       <mat-label>كلمة المرور</mat-label>
-      <span matPrefix><i class="fas fa-lock"></i>&nbsp;</span>
-      <input
-        matInput
-        id="password"
-        type="password"
-        formControlName="password"
-      />
+      <input matInput type="password" formControlName="password" />
       <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
         كلمة المرور مطلوبة
       </mat-error>
     </mat-form-field>
 
-    <button mat-mini-fab  type="submit" class="main-button">
-      دخول <i ></i>
-    </button>
-    <button>هل نسيت كلمة المرور؟</button>
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <button mat-mini-fab type="submit" class="main-button">دخول</button>
+    <button type="button" (click)="goToForgotPassword()">هل نسيت كلمة المرور؟</button>
   </form>
 </div>

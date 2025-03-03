@@ -1,0 +1,12 @@
+<mat-dialog-content align="center">
+  <img src="/warning.png" alt="warning" />
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button (click)="cancelDelete()">
+    {{ data.cancelButtonLabel }}
+  </button>
+  <button mat-button (click)="confirmDelete()" class="rectangle-btn">
+    {{ data.confirmButtonLabel }}
+  </button>
+</mat-dialog-actions>

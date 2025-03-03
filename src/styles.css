@@ -3,36 +3,87 @@
 :root {
   --primary: #088395;
   --white: #f8f8f8;
+  --title: #071952;
 }
 html,
 body {
   height: 100%;
-  font-family: "Tajawal", serif ;
+  font-family: "Tajawal", serif;
 }
 body {
   margin: 0;
   padding: 0;
   direction: rtl;
+  box-sizing: border-box;
 }
 
-/* .mat-mdc-form-field-subscript-wrapper,
-.mat-mdc-form-field-bottom-align::before {
+tr {
   font-family: "Tajawal", serif !important;
-} */
-
-.title {
-  color: var(--white);
 }
+
 button {
   all: unset;
   color: var(--white);
   cursor: pointer;
   margin-top: 10px;
 }
+.flex {
+  display: flex;
+  justify-content: center;
+}
+.flex-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.section-title {
+  color: var(--title);
+}
+.title {
+  color: var(--white);
+}
+.sec-bg {
+  background-color: #d9d9d998;
+}
+.sec-padding {
+  padding: 20px 30px;
+}
+
 .main-button {
   background-color: var(--white) !important;
   color: var(--primary) !important;
   width: 100% !important;
   font-weight: bold !important;
   border-radius: 10px !important;
+}
+.rounded-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--primary) !important;
+  color: var(--white) !important;
+  padding: 0px 10px !important;
+  border-radius: 30px !important;
+  font-weight: bold !important;
+}
+.rectangle-btn {
+  background-color: var(--primary) !important;
+  color: var(--white) !important;
+  padding: 5px 15px !important;
+  border-radius: 6px !important;
+  font-weight: bold !important;
+}
+
+mat-error,
+.error-message {
+  color: rgb(187, 36, 36) !important;
+  font-size: 13px;
+}
+
+.users-page,
+.employees-page,
+.operations-page {
+  min-height: 100vh;
 }

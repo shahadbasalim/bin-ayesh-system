@@ -1,0 +1,23 @@
+<div class="add-option-dialog">
+  <h5 mat-dialog-title>{{ data.label }}</h5>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>أدخل {{ data.label }}</mat-label>
+      <input matInput [formControl]="optionControl" />
+      <mat-error *ngIf="optionControl.hasError('required')">
+        {{ data.label }} مطلوب
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="center" class="mat-dialog-actions">
+    <button
+      mat-flat-button
+      (click)="save()"
+      [disabled]="optionControl.invalid"
+      class="rectangle-btn"
+    >
+      حفظ
+    </button>
+    <button mat-button (click)="dialogRef.close()" class="cancel-btn">إلغاء</button>
+  </div>
+</div>
