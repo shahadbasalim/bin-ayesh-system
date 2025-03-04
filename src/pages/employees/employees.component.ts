@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 //
 import { DialogComponent } from '../../app/shared/dialog/dialog.component';
-import { LogService } from '../../app/services/log/log.service';
+import { LogService } from '../../app/core/services/log/log.service';
 
 export interface Employees {
   idNumber: string;

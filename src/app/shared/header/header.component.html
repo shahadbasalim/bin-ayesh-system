@@ -1,4 +1,4 @@
-<header *ngIf="showHeader">
+<header>
   <h1 class="section-title">مرحبا</h1>
   <div class="nav" [class.open]="isNavOpen">
     <ul>
@@ -16,7 +16,7 @@
       >
         <a [routerLink]="link.path">
           <mat-icon
-            [style.color]="link.path === '/login' ? 'red' : 'inherit'"
+            [style.color]="link.icon === 'logout' ? 'red' : 'inherit'"
             >{{ link.icon }}</mat-icon
           >
           <span *ngIf="isNavOpen">{{ link.label }}</span>

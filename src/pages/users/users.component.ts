@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 //
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { LogService } from '../../app/services/log/log.service';
+import { LogService } from '../../app/core/services/log/log.service';
 
 interface User {
   name: string;

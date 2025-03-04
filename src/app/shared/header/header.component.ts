@@ -18,15 +18,12 @@ export class HeaderComponent {
   ];
 
   isNavOpen = false;
+  // يخزن المسار الحالي للصفحة النشطة
   activeRoute = '/';
-  showHeader = true;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       this.activeRoute = this.router.url;
-      this.showHeader =
-        this.activeRoute !== '/login' &&
-        this.activeRoute !== '/forgot-password';
     });
   }
 

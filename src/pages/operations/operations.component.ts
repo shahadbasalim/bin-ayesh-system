@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LogService } from '../../app/services/log/log.service';
+import { LogService } from '../../app/core/services/log/log.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TableComponent } from '../../app//shared/table/table.component'; 
+import { TableComponent } from '../../app//shared/table/table.component';
 
 @Component({
   selector: 'app-operations',
