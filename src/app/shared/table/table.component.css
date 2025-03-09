@@ -11,8 +11,12 @@
   display: flex;
   justify-content: end;
 }
+.table-wrapper {
+  overflow-x: auto;
+}
 table {
   background-color: var(--white);
+  overflow-x: scroll;
 }
 th {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
@@ -27,4 +31,11 @@ td {
   margin-top: 20px;
   display: flex;
   align-items: center;
+}
+
+/* media query */
+@media (max-width: 768px) {
+  .title-add-btn {
+    margin: 20px;
+  }
 }

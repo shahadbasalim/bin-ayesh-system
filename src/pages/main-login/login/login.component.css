@@ -10,3 +10,9 @@ mat-form-field {
   width: 100%;
   color: var(--white);
 }
+/* media query */
+@media (max-width: 576px) {
+  .login-container form {
+    width: 80%;
+  }
+}
