@@ -11,14 +11,13 @@
 
       <!-- links -->
       <li
-        *ngFor="let link of navLinks"
+        *ngFor="let link of getFilteredNavLinks()"
         [class.active]="activeRoute === link.path"
       >
         <a [routerLink]="link.path">
-          <mat-icon
-            [style.color]="link.icon === 'logout' ? 'red' : 'inherit'"
-            >{{ link.icon }}</mat-icon
-          >
+          <mat-icon [style.color]="link.icon === 'logout' ? 'red' : 'inherit'">
+            {{ link.icon }}
+          </mat-icon>
           <span *ngIf="isNavOpen">{{ link.label }}</span>
         </a>
       </li>

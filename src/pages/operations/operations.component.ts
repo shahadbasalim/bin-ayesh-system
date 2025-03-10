@@ -12,10 +12,13 @@ export class OperationsComponent implements OnInit {
   logs: any[] = [];
   // نرسل من خلالها أعمدة الجدول
   columns = [
-    { key: 'id', label: 'ID العملية' },
-    { key: 'operation', label: 'العملية' },
-    { key: 'page', label: 'صفحة العملية' },
+    { key: 'userId', label: 'ID المستخدم' },
+    { key: 'user', label: 'المستخدم' },
     { key: 'date', label: 'التاريخ والوقت' },
+    { key: 'page', label: 'شاشة العملية' },
+    { key: 'operation', label: 'العملية' },
+    { key: 'id', label: 'ID العملية' },
+
   ];
   dataSource = new MatTableDataSource<any>(this.logs);
 

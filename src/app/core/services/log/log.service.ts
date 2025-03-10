@@ -19,11 +19,17 @@ export class LogService {
     const lastId = logs.length > 0 ? logs[logs.length - 1].id : 0;
     const newId = lastId + 1;
 
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    const userName = loggedInUser?.name || 'غير مسجل';
+    const userId = loggedInUser?.id || 'غير معرف';
+
     const logEntry = {
       id: newId,
       operation,
       page,
       date: new Date().toLocaleString(),
+      user: userName, // إضافة اسم المستخدم
+      userId: userId, // إضافة معرف المستخدم
     };
 
     logs.push(logEntry);

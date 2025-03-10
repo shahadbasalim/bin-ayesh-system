@@ -42,16 +42,50 @@ export class LoginComponent {
     // اذا كان الفورمinvalid  ماراح يكمل العملية
     if (this.loginForm.invalid) return;
 
-    // اذا كان الفورم صالح على ذي البيانات بيكمل العملية
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
+    // التحقق من المستخدم الأساسي (ادارة)
     if (email === 'admin@gmail.com' && password === 'securepassword') {
+      localStorage.setItem(
+        'loggedInUser',
+        JSON.stringify({ email, role: 'ادارة', name: 'ادمن', id: 1 })
+      );
       this.router.navigate(['/users']);
-    } else {
-      this.errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+      return;
     }
+
+    // جلب المستخدمين من localStorage
+    const storedUsers = localStorage.getItem('users');
+    if (storedUsers) {
+      const users = JSON.parse(storedUsers);
+
+      // البحث عن مستخدم مطابق
+      const user = users.find(
+        (u: any) => u.email === email && u.password === password
+      );
+
+      if (user) {
+        // حفظ بيانات المستخدم المسجّل
+        localStorage.setItem(
+          'loggedInUser',
+          JSON.stringify({ email, role: user.role, name: user.name, id: user.id })
+        );
+
+        // التوجيه حسب الصلاحية
+        if (user.role === 'ادارة') {
+          this.router.navigate(['/users']); // صلاحية كاملة
+        } else {
+          this.router.navigate(['/employees']); // السماح فقط بصفحة الموظفين
+        }
+        return;
+      }
+    }
+
+    // في حال لم يتم العثور على مستخدم صالح
+    this.errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
   }
+
 
   goToForgotPassword() {
     this.router.navigate(['/forgot-password']);

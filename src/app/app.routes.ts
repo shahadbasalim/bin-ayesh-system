@@ -8,7 +8,7 @@ import { UsersComponent } from '../pages/users/users.component';
 import { EmployeesComponent } from '../pages/employees/employees.component';
 import { EmployeeDetailsComponent } from '../pages/employees/employee-details/employee-details.component';
 import { OperationsComponent } from '../pages/operations/operations.component';
-// 
+//
 import { NotFoundPageComponent } from '../pages/not-found-page/not-found-page.component';
 
 export const routes: Routes = [

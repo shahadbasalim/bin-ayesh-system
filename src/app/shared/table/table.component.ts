@@ -50,8 +50,13 @@ export class TableComponent<T> implements AfterViewInit {
   @Output() viewEmployee = new EventEmitter<T>();
 
   displayedColumns!: string[];
+  userRole: string | null = null;
 
   ngOnInit() {
+    // استرجاع صلاحية المستخدم من localStorage
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    this.userRole = loggedInUser.role;
+
     // هنا بنمشي على كل عامود في الجدول وفي حال تحقق الشرط راح نضيف العامود الخاص
     this.displayedColumns = [...this.columns.map((col) => col.key)];
 
@@ -76,5 +81,10 @@ export class TableComponent<T> implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.paginator.pageSize = 5; // تحديد عدد الصفوف في الجدول لكل صفحة
+  }
+
+  // التحقق من اظهار أيقونة التعديل بناء على صلاحية المستخدم
+  shouldShowEditButton(): boolean {
+    return this.userRole === 'ادارة';
   }
 }
