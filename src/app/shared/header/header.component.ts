@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+// Angular Material
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',

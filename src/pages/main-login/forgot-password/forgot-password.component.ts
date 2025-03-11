@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+// Angular Material
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -17,7 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,

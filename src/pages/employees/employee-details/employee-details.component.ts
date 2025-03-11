@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employees } from '../employees.component';
 import { CommonModule } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+// components
+import { Employees } from '../employees.component';
+
 @Component({
   selector: 'app-employee-details',
   imports: [CommonModule],

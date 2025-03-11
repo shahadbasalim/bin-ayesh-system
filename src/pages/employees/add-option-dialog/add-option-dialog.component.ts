@@ -1,15 +1,14 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+// Angular Material
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-add-option-dialog',
   standalone: true,
   imports: [
-    MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     CommonModule,
@@ -28,7 +27,7 @@ export class AddOptionDialogComponent {
   save() {
     if (this.optionControl.valid) {
       this.dialogRef.close(this.optionControl.value);
-      
+
     }
   }
 }

@@ -4,6 +4,7 @@
   --primary: #088395;
   --white: #f8f8f8;
   --title: #071952;
+  --gray: #00000080;
 }
 html,
 body {
@@ -29,7 +30,7 @@ button {
 }
 .flex {
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 .flex-column {
   display: flex;

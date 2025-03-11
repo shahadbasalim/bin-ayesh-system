@@ -1,10 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatDialog,
-} from '@angular/material/dialog';
 import {
   FormBuilder,
   FormGroup,
@@ -13,7 +7,13 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-//
+// Angular Material
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+} from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,7 +23,7 @@ import {
   MatNativeDateModule,
   provideNativeDateAdapter,
 } from '@angular/material/core';
-//
+// components
 import { AddOptionDialogComponent } from '../../../pages/employees/add-option-dialog/add-option-dialog.component';
 
 @Component({
@@ -82,7 +82,9 @@ export class DialogComponent implements OnInit {
       );
 
       if (field.type === 'dropdown') {
-        const storedOptions = JSON.parse(localStorage.getItem(field.key) || '[]');
+        const storedOptions = JSON.parse(
+          localStorage.getItem(field.key) || '[]'
+        );
         if (storedOptions.length) {
           storedOptions.forEach((option: string) => {
             if (!field.options.includes(option)) {
@@ -92,6 +94,15 @@ export class DialogComponent implements OnInit {
         }
       }
     });
+  }
+
+  selectedFiles: { [key: string]: File } = {};
+
+  onFileSelected(event: Event, key: string) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFiles[key] = input.files[0];
+    }
   }
 
   openAddOptionDialog(field: any) {

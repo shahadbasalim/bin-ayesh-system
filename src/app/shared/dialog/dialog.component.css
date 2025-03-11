@@ -17,6 +17,25 @@ mat-option {
 ::ng-deep .mat-calendar {
   background-color: var(--primary);
 }
+
 .file-upload {
   margin-bottom: 15px;
+}
+
+.custom-file-input {
+  justify-content: space-between;
+  border: 1.3px solid var(--primary);
+  border-radius: 6px;
+  width: 80%;
+  padding-right: 10px;
+}
+.custom-file-input span {
+  color: var(--gray);
+}
+.upload-icon {
+  background-color: var(--title);
+  color: var(--white);
+  border-radius: 6px;
+  width: 40px;
+  margin-top: 0;
 }

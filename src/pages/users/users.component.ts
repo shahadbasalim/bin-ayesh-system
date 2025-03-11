@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+// components and services
 import { TableComponent } from '../../app/shared/table/table.component';
 import { DialogComponent } from '../../app/shared/dialog/dialog.component';
-//
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { LogService } from '../../app/core/services/log/log.service';
+// Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-//
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { LogService } from '../../app/core/services/log/log.service';
 
 interface User {
   name: string;

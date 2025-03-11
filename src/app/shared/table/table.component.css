@@ -25,13 +25,24 @@ th,
 td {
   text-align: center;
 }
-
+.dots-icon {
+  color: var(--gray);
+}
+.mat-mdc-menu-item:has(.material-icons,mat-icon,[matButtonIcon])  {
+  background-color: var(--white) !important;
+  text-align: right;
+  color: var(--title);
+  mat-icon {
+    color: var(--primary);
+  }
+}
 .paginator-container {
   direction: ltr;
   margin-top: 20px;
   display: flex;
   align-items: center;
 }
+
 
 /* media query */
 @media (max-width: 768px) {

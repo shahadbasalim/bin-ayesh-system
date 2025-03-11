@@ -7,26 +7,25 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//
+// Angular Material
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @Component({
   selector: 'app-table',
   imports: [
     CommonModule,
     MatIconModule,
-    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginatorModule,
     MatPaginator,
+    MatMenuModule
   ],
 
   templateUrl: './table.component.html',

@@ -52,9 +52,24 @@
         </mat-form-field>
 
         <!--  حقول الملفات -->
-        <div *ngIf="field.type === 'file'" class="file-upload">
-            <label>{{ field.label }}</label>
-            <input type="file"  />
+        <div
+          *ngIf="field.type === 'file'"
+          class="file-upload"
+          (click)="fileInput.click()"
+        >
+          <div class="custom-file-input flex">
+            <span>{{ selectedFiles[field.key]?.name || field.label }}</span>
+            <button mat-icon-button class="upload-icon">
+              <mat-icon *ngIf="data.mode !== 'view'">image</mat-icon>
+              <mat-icon *ngIf="data.mode == 'view'">download</mat-icon>
+            </button>
+            <input
+              type="file"
+              (change)="onFileSelected($event, field.key)"
+              hidden
+              #fileInput
+            />
+          </div>
         </div>
       </ng-container>
     </form>
@@ -75,7 +90,6 @@
       mat-flat-button
       class="rectangle-btn"
       (click)="onPreview()"
-
     >
       معاينة قبل التنزيل
     </button>
