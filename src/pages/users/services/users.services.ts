@@ -17,7 +17,6 @@ export class UsersService {
       this.users = JSON.parse(storedUsers);
     } else {
       console.log('no users found');
-
     }
   }
 

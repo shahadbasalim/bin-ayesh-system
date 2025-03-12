@@ -1,3 +1,4 @@
+// ارسال اعمدة الجدول
 export const USER_COLUMNS = [
   { key: 'name', label: 'الاسم' },
   { key: 'email', label: 'البريد الإلكتروني' },
@@ -5,6 +6,7 @@ export const USER_COLUMNS = [
   { key: 'role', label: 'الصلاحية' },
 ];
 
+// ارسال حقول dialog
 export const USER_FIELDS = [
   { key: 'id', label: 'ID المستخدم', type: 'text', required: true },
   { key: 'name', label: 'الاسم', type: 'text', required: true },

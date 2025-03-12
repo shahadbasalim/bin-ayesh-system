@@ -17,7 +17,7 @@ export class EmployeesService {
     if (storedData) {
       this.employees = JSON.parse(storedData);
     } else {
-      console.log('no employees');
+      console.log('no employees found');
 
     }
   }
@@ -35,6 +35,7 @@ export class EmployeesService {
     const index = this.employees.findIndex(
       (e) => e.idNumber === employee.idNumber
     );
+    // اذا الاندكس ما يساوي -1 هذا يعني ان الموظف موجود بالفعل
     if (index !== -1) {
       this.employees[index] = employee;
       this.saveEmployeesToLocalStorage();

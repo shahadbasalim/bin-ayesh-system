@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+// model
 import { Employees } from '../interface/employees.model';
 
 @Component({
@@ -66,7 +67,7 @@ export class EmployeeDetailsComponent implements OnInit {
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
-        pdf.save('employee-details.pdf');
+        pdf.save('تقرير-موظف.pdf');
       })
       .catch((error) => {
         console.error('Error generating PDF:', error);

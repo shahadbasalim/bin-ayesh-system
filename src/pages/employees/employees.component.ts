@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-//
+// components
 import { TableComponent } from '../../app/shared/table/table.component';
 import { DialogComponent } from '../../app/shared/dialog/dialog.component';
-//
+// angular material
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-//
+// model and service
 import { Employees } from './interface/employees.model';
 import { EmployeesService } from './services/employees.service';
-import { EMPLOYEES_COLUMNS, EMPLOYEE_FIELDS } from './constant/employees.constants';
-//
-import { LogService } from '../../app/core/services/log/log.service';
+import {
+  EMPLOYEES_COLUMNS,
+  EMPLOYEE_FIELDS,
+} from './constant/employees.constants';
+import { LogService } from '../../app/shared/services/log/log.service';
+
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  imports: [
-    TableComponent,
-  ],
+  imports: [TableComponent],
 })
 export class EmployeesComponent implements OnInit {
   employeesColumns = EMPLOYEES_COLUMNS;
@@ -26,7 +27,7 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private employeesService: EmployeesService,
-    private logService: LogService,
+    private logService: LogService
   ) {}
 
   ngOnInit() {
@@ -66,7 +67,7 @@ export class EmployeesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.employeesService.updateEmployee({ ...employee, ...result });
+        this.employeesService.updateEmployee({ ...employee, ...result }); //Spread Operator
         this.dataSource.data = this.employeesService.getEmployees();
         this.logService.addLog('تعديل موظف', ' الموظفين');
       }
@@ -81,7 +82,7 @@ export class EmployeesComponent implements OnInit {
         title: 'عرض البيانات',
         mode: 'view',
         fields: this.employeeFields.map((field) => ({
-          ...field,
+          ...field, //Spread Operator
           disabled: true,
         })),
         values: employee,

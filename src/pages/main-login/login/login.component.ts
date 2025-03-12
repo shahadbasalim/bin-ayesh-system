@@ -43,7 +43,7 @@ export class LoginComponent {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
-    // التحقق من المستخدم الأساسي (ادارة)
+    // التحقق من المستخدم الأساسي (ادمن)
     if (email === 'admin@gmail.com' && password === 'securepassword') {
       localStorage.setItem(
         'loggedInUser',
@@ -64,7 +64,7 @@ export class LoginComponent {
       );
 
       if (user) {
-        // حفظ بيانات المستخدم المسجّل
+        // حفظ بيانات المستخدم المسجل
         localStorage.setItem(
           'loggedInUser',
           JSON.stringify({ email, role: user.role, name: user.name, id: user.id })
@@ -72,9 +72,9 @@ export class LoginComponent {
 
         // التوجيه حسب الصلاحية
         if (user.role === 'ادارة') {
-          this.router.navigate(['/users']); // صلاحية كاملة
+          this.router.navigate(['/users']);
         } else {
-          this.router.navigate(['/employees']); // السماح فقط بصفحة الموظفين
+          this.router.navigate(['/employees']);
         }
         return;
       }

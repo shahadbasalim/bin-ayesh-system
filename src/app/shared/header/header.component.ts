@@ -14,12 +14,17 @@ export class HeaderComponent {
   navLinks = [
     { path: '/users', icon: 'group', label: 'المستخدمين', role: 'ادارة' },
     { path: '/employees', icon: 'badge', label: 'الموظفين', role: 'all' },
-    { path: '/operations', icon: 'timeline', label: 'حركة العمليات', role: 'ادارة' },
+    {
+      path: '/operations',
+      icon: 'timeline',
+      label: 'حركة العمليات',
+      role: 'ادارة',
+    },
     { path: '/login', icon: 'logout', label: 'تسجيل الخروج', role: 'all' },
   ];
 
-  loggedInUser: any = null;
   isNavOpen = false;
+  loggedInUser: any = null;
   // يخزن المسار الحالي للصفحة النشطة
   activeRoute = '/';
 
@@ -38,10 +43,10 @@ export class HeaderComponent {
   }
 
   getFilteredNavLinks() {
-    if (!this.loggedInUser) return [];
-    return this.navLinks.filter(link => link.role === 'all' || link.role === this.loggedInUser.role);
+    return this.navLinks.filter(
+      (link) => link.role === 'all' || link.role === this.loggedInUser.role
+    );
   }
-
 
   toggleNav() {
     this.isNavOpen = !this.isNavOpen;

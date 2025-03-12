@@ -5,7 +5,7 @@ import { DialogComponent } from '../../app/shared/dialog/dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 // Services
 import { UsersService } from './services/users.services';
-import { LogService } from '../../app/core/services/log/log.service';
+import { LogService } from '../../app/shared/services/log/log.service';
 // Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private usersService: UsersService,
-    private logService: LogService,
+    private logService: LogService
   ) {}
 
   ngOnInit(): void {
