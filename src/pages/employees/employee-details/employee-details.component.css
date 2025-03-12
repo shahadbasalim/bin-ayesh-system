@@ -1,9 +1,9 @@
 .employee-details-page {
-  width: 210mm;
-  padding: 10mm;
+  padding-bottom: 20px;
 }
 .employee-details {
-  padding-bottom: 20px;
+  max-width: 210mm; /* عرض A4 */
+  min-height: 297mm; /* ارتفاع A4 */
 }
 img {
   width: 200px;

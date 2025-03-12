@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-// components and services
+// Components
 import { TableComponent } from '../../app/shared/table/table.component';
 import { DialogComponent } from '../../app/shared/dialog/dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+// Services
+import { UsersService } from './services/users.services';
 import { LogService } from '../../app/core/services/log/log.service';
 // Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-
-interface User {
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-}
+// Models and Constants
+import { User } from './interface/users.model';
+import { USER_COLUMNS, USER_FIELDS } from './constant/users.constant';
 
 @Component({
   selector: 'app-users',
@@ -22,70 +20,45 @@ interface User {
   templateUrl: './users.component.html',
 })
 export class UsersComponent implements OnInit {
-  // ارسال اعمدة الجدول
-  userColumns = [
-    { key: 'name', label: 'الاسم' },
-    { key: 'email', label: 'البريد الإلكتروني' },
-    { key: 'phone', label: 'رقم الهاتف' },
-    { key: 'role', label: 'الصلاحية' },
-  ];
+  userColumns = USER_COLUMNS;
+  userFields = USER_FIELDS;
+  dataSource = new MatTableDataSource<User>([]);
 
-  users: User[] = [];
-  dataSource = new MatTableDataSource<User>(this.users);
+  constructor(
+    private dialog: MatDialog,
+    private usersService: UsersService,
+    private logService: LogService,
+  ) {}
 
   ngOnInit(): void {
-    this.loadUsersFromLocalStorage();
+    this.usersService.loadUsersFromLocalStorage();
+    this.dataSource.data = this.usersService.getUsers();
   }
 
-  loadUsersFromLocalStorage() {
-    const storedUsers = localStorage.getItem('users');
-    if (storedUsers) {
-      this.users = JSON.parse(storedUsers);
-      this.dataSource.data = this.users;
-    }
-  }
-
-  saveUsersToLocalStorage() {
-    localStorage.setItem('users', JSON.stringify(this.users));
-  }
-
-  constructor(private dialog: MatDialog, private logService: LogService) {}
-
-
-  openAddUserDialog() {
+  openAddUserDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '400px',
       height: '400px',
       data: {
         title: 'إضافة مستخدم',
-        fields: [
-          { key: 'id', label: 'ID المستخدم', type: 'text', required: true },
-          { key: 'name', label: 'الاسم', type: 'text', required: true },
-          { key: 'email', label: 'البريد الإلكتروني', type: 'text', required: true },
-          { key: 'password', label: 'كلمة المرور', type: 'text', required: true },
-          { key: 'phone', label: 'رقم الهاتف', type: 'text', required: true },
-          { key: 'role', label: 'الصلاحية', type: 'dropdown', required: true, options: ['ادارة', 'موظف'] },
-        ],
+        fields: this.userFields,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const newUser = { ...result };
-        this.users.push(newUser);
-        this.dataSource.data = [...this.users];
-        this.saveUsersToLocalStorage();
-         //  تسجيل العملية مع اسم الصفحة
-      this.logService.addLog('إضافة مستخدم', 'المستخدمين');
+        this.usersService.addUser(result);
+        this.dataSource.data = this.usersService.getUsers();
+        this.logService.addLog('إضافة مستخدم', 'المستخدمين');
       }
     });
   }
 
-  openDeleteDialog(user: User) {
+  openDeleteDialog(user: User): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '400px',
       data: {
-        message: `هل انت متأكد من حذف المستخدم؟`,
+        message: `هل أنت متأكد من حذف المستخدم؟`,
         confirmButtonLabel: 'نعم',
         cancelButtonLabel: 'إلغاء',
       },
@@ -93,11 +66,9 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((confirmed) => {
       if (confirmed) {
-        this.users = this.users.filter((u) => u !== user);
-        this.dataSource.data = [...this.users];
-        this.saveUsersToLocalStorage();
-        //  تسجيل العملية مع اسم الصفحة
-      this.logService.addLog('حذف مستخدم', 'المستخدمون');
+        this.usersService.deleteUser(user);
+        this.dataSource.data = this.usersService.getUsers();
+        this.logService.addLog('حذف مستخدم', 'المستخدمين');
       }
     });
   }

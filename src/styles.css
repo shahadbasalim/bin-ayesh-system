@@ -76,7 +76,11 @@ button {
   border-radius: 6px !important;
   font-weight: bold !important;
 }
-
+.rectangle-btn:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+}
 mat-error,
 .error-message {
   color: rgb(187, 36, 36) !important;

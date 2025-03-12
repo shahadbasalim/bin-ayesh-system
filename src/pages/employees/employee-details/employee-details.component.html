@@ -3,35 +3,9 @@
     <div *ngIf="employee" #pdfContent class="employee-details flex-column">
       <img src="/bin-ayesh-logo.png" alt="logo" />
       <div class="fields-container">
-        <p><strong>رقم الهوية/الإقامة:</strong> {{ employee.idNumber }}</p>
-        <p><strong>الاسم:</strong> {{ employee.name }}</p>
-        <p><strong>رقم الهاتف:</strong> {{ employee.phone }}</p>
-        <p><strong>رقم الحدود:</strong> {{ employee.border || "غير متوفر" }}</p>
-        <p><strong>الجنس:</strong> {{ employee.gender || "غير متوفر" }}</p>
-        <p><strong>تاريخ الميلاد:</strong> {{ employee.birthday }}</p>
-        <p><strong>رقم الكفيل:</strong> {{ employee.sponsorNumber }}</p>
-        <p><strong>المهنة:</strong> {{ employee.job }}</p>
-        <p><strong>حالة الموظف:</strong> {{ employee.status }}</p>
-        <p><strong>الجنسية:</strong> {{ employee.nationality }}</p>
-        <p>
-          <strong>رقم الجواز:</strong>
-          {{ employee.passportNumber || "غير متوفر" }}
-        </p>
-        <p>
-          <strong>تاريخ انتهاء الجواز:</strong>
-          {{ employee.passportExpiryDate || "غير متوفر" }}
-        </p>
-        <p><strong>الفرع الحالي للعمل:</strong> {{ employee.branch }}</p>
-        <p><strong>اسم البنك:</strong> {{ employee.bank || "غير متوفر" }}</p>
-        <p><strong>الايبان:</strong> {{ employee.iban || "غير متوفر" }}</p>
-        <p>
-          <strong>البريد الالكتروني:</strong>
-          {{ employee.email || "غير متوفر" }}
-        </p>
-        <p>
-          <strong>رقم تواصل آخر:</strong>
-          {{ employee.additionalPhone || "غير متوفر" }}
-        </p>
+        <ng-container *ngFor="let field of employeeFields">
+          <p><strong>{{ field.label }}:</strong> {{ employee[field.key] || 'غير متوفر' }}</p>
+        </ng-container>
       </div>
       <div class="btn-container no-print">
         <button (click)="downloadPDF()" class="rectangle-btn">تنزيل PDF</button>
