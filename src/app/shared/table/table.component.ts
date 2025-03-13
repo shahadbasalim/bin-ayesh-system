@@ -7,6 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// service
+import { TableService } from './service/table.service';
 // Angular Material
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +28,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatPaginator,
     MatMenuModule,
   ],
-
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
 })
@@ -38,8 +39,8 @@ export class TableComponent<T> implements AfterViewInit {
   @Input() columns!: { key: string; label: string }[];
   @Input() dataSource!: MatTableDataSource<T>;
 
-  @Input() hasDeleteAction: boolean = false; // عامود للديليت
-  @Input() hasDetailsActions: boolean = false; //عامود للديتايلس
+  @Input() hasDeleteAction: boolean = false; // delete column
+  @Input() hasDetailsActions: boolean = false; //details column
 
   @Output() addUser = new EventEmitter<void>(); // ذي بتستخدم لصفحة المستخدمين وكمان للموظفين
   @Output() deleteUser = new EventEmitter<T>();
@@ -50,6 +51,8 @@ export class TableComponent<T> implements AfterViewInit {
   displayedColumns!: string[];
   userRole: string | null = null;
 
+  constructor(private tableService: TableService) {}
+
   ngOnInit() {
     // استرجاع صلاحية المستخدم من localStorage
     const loggedInUser = JSON.parse(
@@ -57,27 +60,22 @@ export class TableComponent<T> implements AfterViewInit {
     );
     this.userRole = loggedInUser.role;
 
-    // هنا بنمشي على كل عامود في الجدول وفي حال تحقق الشرط راح نضيف العامود الخاص
-    this.displayedColumns = [...this.columns.map((col) => col.key)];
+    // اعداد اعمدة الجدول واعمده الحذف والتفاصيل
+    this.displayedColumns = this.tableService.setDisplayedColumns(
+      this.columns,
+      this.hasDeleteAction,
+      this.hasDetailsActions
+    );
+  }
 
-    if (this.hasDeleteAction) {
-      this.displayedColumns.push('delete-action');
-    }
-
-    if (this.hasDetailsActions) {
-      this.displayedColumns.push('details-actions');
-    }
+  // edit icon
+  shouldShowEditButton(): boolean {
+    return this.userRole === 'ادارة';
   }
 
   // Search function
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  
-  // edit icon
-  shouldShowEditButton(): boolean {
-    return this.userRole === 'ادارة';
+    this.tableService.applyFilter(event, this.dataSource);
   }
 
   // Pagination function

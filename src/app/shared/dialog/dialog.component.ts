@@ -25,6 +25,8 @@ import {
 } from '@angular/material/core';
 // components
 import { AddOptionDialogComponent } from '../../../pages/employees/add-option-dialog/add-option-dialog.component';
+// services
+import { DialogService } from './services/dialog.service';
 
 @Component({
   selector: 'app-dialog',
@@ -47,44 +49,28 @@ import { AddOptionDialogComponent } from '../../../pages/employees/add-option-di
 })
 export class DialogComponent implements OnInit {
   form: FormGroup;
+  selectedFiles: { [key: string]: File } = {};
 
   constructor(
-    private fb: FormBuilder,
+    private dialogService: DialogService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,
     private router: Router
   ) {
-    // هنا ماعبيته لان الحقول بتجيني من مكونات المستخدمين والموظفين
-    this.form = this.fb.group({});
-    this.data.fields.forEach((field: any) => {
-      // جلب القيم القديمة في حال توفرها اذا فكيت على وضع التعديل من مكون الموظفين
-      const value = this.data.values ? this.data.values[field.key] || '' : '';
-
-      this.form.addControl(
-        field.key,
-        this.fb.control(value, field.required ? Validators.required : [])
-      );
-    });
-    // إذا كان الوضع view، نقوم بتعطيل كافة الحقول
+    this.form = this.dialogService.createForm(
+      this.data.fields,
+      this.data.values
+    );
     if (this.data.mode === 'view') {
       this.form.disable();
     }
   }
 
-  // options on dropdown menu
   ngOnInit() {
     this.data.fields.forEach((field: any) => {
-      const value = this.data.values ? this.data.values[field.key] || '' : '';
-      this.form.addControl(
-        field.key,
-        this.fb.control(value, field.required ? Validators.required : [])
-      );
-
       if (field.type === 'dropdown') {
-        const storedOptions = JSON.parse(
-          localStorage.getItem(field.key) || '[]'
-        );
+        const storedOptions = this.dialogService.getFromLocalStorage(field.key);
         if (storedOptions.length) {
           storedOptions.forEach((option: string) => {
             if (!field.options.includes(option)) {
@@ -95,8 +81,6 @@ export class DialogComponent implements OnInit {
       }
     });
   }
-
-  selectedFiles: { [key: string]: File } = {};
 
   onFileSelected(event: Event, key: string) {
     const input = event.target as HTMLInputElement;
@@ -112,22 +96,9 @@ export class DialogComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // التحقق من وجود الخيار الجديد في القائمة
-        const isOptionExists = field.options.includes(result);
-
-        if (!isOptionExists) {
-          field.options.push(result);
-
-          // تحديث القيم في LocalStorage
-          let storedOptions = JSON.parse(
-            localStorage.getItem(field.key) || '[]'
-          );
-          if (!storedOptions.includes(result)) {
-            storedOptions.push(result);
-            localStorage.setItem(field.key, JSON.stringify(storedOptions));
-          }
-        }
+      if (result && !field.options.includes(result)) {
+        field.options.push(result);
+        this.dialogService.addToLocalStorageArray(field.key, result);
       }
     });
   }
