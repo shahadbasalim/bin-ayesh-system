@@ -18,18 +18,18 @@ export class DialogService {
     return form;
   }
 
-  // الحصول على البيانات من localStorage
+  // استرجاع خيارات القائمة المنسدلة
   getFromLocalStorage(key: string): any {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : [];
   }
 
-  // حفظ البيانات في localStorage
+  // حفظ خيارات القائمة المنسدلة
   saveToLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  // إضافة عنصر جديد إلى مصفوفة في localStorage
+  // إضافة عنصر جديد إلى القائمة المنسدلة
   addToLocalStorageArray(key: string, value: any): void {
     const storedItems = this.getFromLocalStorage(key);
     if (!storedItems.includes(value)) {
